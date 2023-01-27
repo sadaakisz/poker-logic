@@ -13,12 +13,14 @@ def main():
 
     x = input("Please, insert player 1 name: ")
     print("WELCOME " + x)
+    print("You play with the A key in the keyboard")
 
     t.sleep(2)
     os.system('cls')
 
     y = input("Please, insert player 2 name: ")
     print("WELCOME " + y)
+    print("You play with the L key in the keyboard")
 
     t.sleep(2)
     os.system('cls')
@@ -85,7 +87,7 @@ def main():
                       str(player_1.number_cards) + ' cards')
                 print('Player: ' + player_2.name + ' has ' +
                       str(player_2.number_cards) + ' cards')
-                t.sleep(3)
+                t.sleep(4)
                 print('Get Ready...')
                 t.sleep(3)
                 os.system('cls')
@@ -99,7 +101,7 @@ def main():
                     loser = player_2
                 # case when the player gets nervioso and mete mano when it's not the time
                 os.system('cls')
-                print('Player:' + loser.name + ' loses because is nervioso')
+                print('Player: ' + loser.name + ' loses because is NERVIOSO')
                 winner = player_1 if loser == player_2 else player_2
                 loser.add_cards(table_cards)
                 turn_number = 0
@@ -108,7 +110,7 @@ def main():
                       str(player_1.number_cards) + ' cards')
                 print('Player: ' + player_2.name + ' has ' +
                       str(player_2.number_cards) + ' cards')
-                t.sleep(3)
+                t.sleep(4)
                 print('Get Ready...')
                 t.sleep(3)
                 os.system('cls')
@@ -119,6 +121,8 @@ def main():
           str(player_1.number_cards) + ' cards')
     print('Player: ' + player_2.name + ' has ' +
           str(player_2.number_cards) + ' cards')
+          
+    t.sleep(3)
 
     if player_1.number_cards < player_2.number_cards:
         print('Winner is player: ' + player_1.name)
