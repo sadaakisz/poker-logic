@@ -2,6 +2,7 @@ import nervioso_classes as nc
 import time as t
 from pytimedinput import timedKey
 import os
+import network_classes
 
 
 def main():
@@ -36,13 +37,16 @@ def main():
         print(i+1)
         t.sleep(1)
         os.system('cls')
-    
+
     # create players
     player_1 = nc.Player('a', x)
     player_2 = nc.Player('l', y)
 
     # create deck
     deck = nc.Deck([])
+
+    # create network
+    net = network_classes.Network()
 
     # let's play!
     turn_number = 0
@@ -65,6 +69,12 @@ def main():
         # difficulty: unadded feature (not implemented) timeout
         first_player, timedOut = timedKey(
             prompt="Waiting Input...", timeout=1.5, resetOnInput=True, allowCharacters="al")
+
+        print("Server Reply: " + first_player)
+
+        if first_player != '':
+            net.send(first_player)
+            print("Server Reply: " + first_player)
 
         # coincidence turn
         if turn_number == card.number:
@@ -121,7 +131,7 @@ def main():
           str(player_1.number_cards) + ' cards')
     print('Player: ' + player_2.name + ' has ' +
           str(player_2.number_cards) + ' cards')
-          
+
     t.sleep(3)
 
     if player_1.number_cards < player_2.number_cards:
