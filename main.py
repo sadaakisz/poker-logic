@@ -1,30 +1,21 @@
-import random
-import model.card as C
-import model.deck as D
+import model.deck as dck
+import model.pocket as pck
+import logic.hand_ranker as hr
 
-deck = []
+deck = dck.Deck()
+board = []
+pocket = pck.Pocket()
+
+for i in range(2):
+    pocket.append(deck.get_card())
+
+print(pocket)
 
 for i in range(5):
-    deck.append(C.Card(random.choice(list(C.Value)).value, random.choice(list(C.Symbol)).value))
+    board.append(deck.get_card())
 
-print(deck)
-deck.sort()
-print(deck)
-flatdeck = [str(x) for x in deck]
-if '14H' in flatdeck or \
-   '2H' in flatdeck or \
-   '3H' in flatdeck or \
-   '4H' in flatdeck or \
-   '5H' in flatdeck or \
-   '6H' in flatdeck or \
-   '7H' in flatdeck or \
-   '8H' in flatdeck or \
-   '9H' in flatdeck or \
-   '10H' in flatdeck or \
-   '11H' in flatdeck or \
-   '12H' in flatdeck or \
-   '13H' in flatdeck:
-    print('Heart found!')
+print(board)
 
-deck = D.Deck()
-print(deck.cards, len(deck.cards))
+print(pocket.hand(board))
+
+hr.rank(pocket.hand(board))
