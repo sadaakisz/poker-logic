@@ -24,11 +24,11 @@ class Symbol(Enum):
 # https://docs.python.org/3/library/functools.html#functools.total_ordering
 @functools.total_ordering
 class Card:
-    def __init__(self, value, symbol):
+    def __init__(self, value, symbol) -> None:
         self.value = value
         self.symbol = symbol
     
-    def _is_valid_operand(self, other):
+    def _is_valid_operand(self, other) -> None:
         return (hasattr(other, 'value') and
                 hasattr(other, 'symbol'))
     
@@ -43,3 +43,9 @@ class Card:
     
     def __repr__(self) -> str:
         return str(self.value)+self.symbol
+    
+    def as_str(self) -> str:
+        return str(self.value)+self.symbol
+    
+    def as_tuple(self) -> tuple:
+        return (self.value, self.symbol)
