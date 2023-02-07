@@ -18,4 +18,4 @@ print(board)
 
 print(pocket.hand(board))
 
-hr.rank(pocket.hand(board))
+hr.rank(pocket.dict_hand(board))
