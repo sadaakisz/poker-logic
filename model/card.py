@@ -48,4 +48,5 @@ class Card:
         return str(self.value)+self.symbol
     
     def as_tuple(self) -> tuple:
+        """Returns tuple: (value, symbol)"""
         return (self.value, self.symbol)
