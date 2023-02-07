@@ -15,7 +15,8 @@ def check_special_flush(dict_hand: dict, max_value: int) -> bool:
             max_symbol = symbol
             other_symbols = []
             for i in range(max_value-1, max_value-5, -1):
-                other_symbols.append(fl_dict_hand[i])
+                if symbol in fl_dict_hand[i]:
+                    other_symbols.append([symbol])
             if other_symbols == [[max_symbol] for _ in range(4)]:
                 return True
     return False
