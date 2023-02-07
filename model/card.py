@@ -1,6 +1,16 @@
 import functools
 from enum import Enum
 class Value(Enum):
+    """
+    Enum with card name and value.
+
+    List(Value) returns a list containing the <Name:Value> pairs.
+
+    List(Value)[x].name returns the card name in string
+
+    and List(Value)[x].value returns integer value.
+    """
+
     TWO = 2
     THREE = 3
     FOUR = 4
@@ -16,6 +26,16 @@ class Value(Enum):
     ACE = 14
 
 class Symbol(Enum):
+    """
+    Enum with card symbol name and single letter string.
+
+    List(Symbol) returns a list containing the <SymbolName:Symbol> pairs.
+
+    List(Symbol)[x].name returns the symbol name in string
+
+    and List(Symbol)[x].value returns integer value.
+    """
+
     DIAMONDS = 'D'
     CLUBS = 'C'
     HEARTS = 'H'
@@ -24,6 +44,17 @@ class Symbol(Enum):
 # https://docs.python.org/3/library/functools.html#functools.total_ordering
 @functools.total_ordering
 class Card:
+    """
+    Class representing a playing card.
+
+    Can be initialized by passing a single string: eg. '13C' for King of Clubs.
+
+    OR
+
+    Can be initialized by passing a Value.value and Symbol.value.
+
+    The initializer does NOT check if the card is a valid playing card yet.
+    """
     def __init__(self, *args) -> None:
         if len(args)==2:
             self.value = args[0]
@@ -39,26 +70,31 @@ class Card:
         else:
             self.value = 0
             self.symbol = 'NA'
-    
+
     def _is_valid_operand(self, other) -> None:
         return (hasattr(other, 'value') and
                 hasattr(other, 'symbol'))
-    
+
     def __eq__(self, other: object) -> bool:
         if not self._is_valid_operand(other):
             return NotImplemented
-        return (self.value == other.value)
+        return self.value == other.value
     def __lt__(self, other: object) -> bool:
         if not self._is_valid_operand(other):
             return NotImplemented
-        return (self.value < other.value)
-    
+        return self.value < other.value
+
     def __repr__(self) -> str:
         return str(self.value)+self.symbol
-    
+
     def as_str(self) -> str:
+        """
+        Returns card as a string.
+
+        eg. Queen of Hearts returns '12H'.
+        """
         return str(self.value)+self.symbol
-    
+
     def as_tuple(self) -> tuple:
         """Returns tuple: (value, symbol)"""
         return (self.value, self.symbol)

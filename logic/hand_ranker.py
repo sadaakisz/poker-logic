@@ -8,7 +8,7 @@ def check_special_flush(dict_hand: dict, max_value: int) -> bool:
         fl_dict_hand[1] = fl_dict_hand[14]
     keys_list = list(fl_dict_hand.keys())
     value_index = keys_list.index(max_value)
-    possible_sf = sum(keys_list[value_index:value_index+5])==(max_value-2)*5 
+    possible_sf = sum(keys_list[value_index:value_index+5])==(max_value-2)*5
     if possible_sf:
         max_symbol = ''
         for symbol in fl_dict_hand[max_value]:
@@ -45,14 +45,16 @@ def check_flush(dict_hand: dict) -> str:
     return ''
 
 def check_straight(dict_hand: dict, key: int) -> str:
-    if key<5: return ''
+    if key<5:
+        return ''
     fl_dict_hand = deepcopy(dict_hand)
     if 14 in fl_dict_hand.keys():
         fl_dict_hand[1] = fl_dict_hand[14]
     keys_list = list(fl_dict_hand.keys())
     value_index = keys_list.index(key)
-    possible_s = sum(keys_list[value_index:value_index+5])==(key-2)*5 
-    if possible_s: return str(key)+' Straight'
+    possible_s = sum(keys_list[value_index:value_index+5])==(key-2)*5
+    if possible_s:
+        return str(key)+' Straight'
     return ''
 
 def check_repeated(dict_hand: dict) -> str:
@@ -63,12 +65,11 @@ def check_repeated(dict_hand: dict) -> str:
         if len(dict_hand[key])==3 and check_pair(dict_hand):
             pair = check_pair(dict_hand)
             return str(key)+' '+pair.split()[0]+' Full House'
-        
         # Flush (wrong len statement) bool checked flush
         if not flush_checked:
             flush = check_flush(dict_hand)
             flush_checked = True
-            if flush: 
+            if flush:
                 return flush
         # Straight
         straight = check_straight(dict_hand, key)
@@ -79,7 +80,8 @@ def check_repeated(dict_hand: dict) -> str:
             return str(key)+' Three of a Kind'
         if len(dict_hand[key])==2:
             pair = check_pair(dict_hand, key)
-            if pair: return str(key)+' '+pair.split()[0]+' Two Pairs'
+            if pair:
+                return str(key)+' '+pair.split()[0]+' Two Pairs'
             return str(key)+' Pair'
     return ''
 
@@ -88,14 +90,14 @@ def rank(dict_hand: dict) -> str:
 
     if check_special_flush(dict_hand, 14):
         return str(14)+' Royal Flush'
-    
     for key in dict_hand:
-        if key<5: break
+        if key<5:
+            break
         if check_special_flush(dict_hand, key):
             return str(key)+' Straight Flush'
 
     repeated = check_repeated(dict_hand)
-    if repeated: return repeated
+    if repeated:
+        return repeated
 
     return str(list(dict_hand.keys())[0])+' High Card'
-

@@ -1,4 +1,3 @@
-import model.card as crd
 import model.deck as dck
 import model.pocket as pck
 import logic.hand_ranker as hr
