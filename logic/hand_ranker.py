@@ -59,6 +59,7 @@ def check_straight(dict_hand: dict, key: int) -> str:
 
 def check_repeated(dict_hand: dict) -> str:
     flush_checked = False
+    pair_present = False
     for key in dict_hand:
         if len(dict_hand[key])==4:
             return str(key)+' Four_of_a_Kind'
@@ -82,11 +83,13 @@ def check_repeated(dict_hand: dict) -> str:
             pair = check_pair(dict_hand, key)
             if pair:
                 return str(key)+' '+pair.split()[0]+' Two_Pairs'
-            return str(key)+' Pair'
+            pair_present = True
+    if pair_present:
+        return str(key)+' Pair'
     return ''
 
 def rank(dict_hand: dict) -> str:
-    print(dict_hand)
+    #print(dict_hand)
 
     if check_special_flush(dict_hand, 14):
         return str(14)+' Royal_Flush'
