@@ -2,9 +2,12 @@ import model.deck as dck
 import model.pocket as pck
 import logic.hand_ranker as hr
 import logic.hand_maker as hm
+import dataset.test_runner as tr
+
+tr.run_test()
 
 for a in range(1):
-
+    break
     deck = dck.Deck()
     board = []
     pocket = pck.Pocket()

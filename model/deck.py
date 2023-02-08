@@ -1,5 +1,5 @@
 import random
-import card as crd
+import model.card as crd
 
 class Deck:
     def __init__(self) -> None:
