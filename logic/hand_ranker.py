@@ -61,10 +61,10 @@ def check_repeated(dict_hand: dict) -> str:
     flush_checked = False
     for key in dict_hand:
         if len(dict_hand[key])==4:
-            return str(key)+' Four of a Kind'
+            return str(key)+' Four_of_a_Kind'
         if len(dict_hand[key])==3 and check_pair(dict_hand):
             pair = check_pair(dict_hand)
-            return str(key)+' '+pair.split()[0]+' Full House'
+            return str(key)+' '+pair.split()[0]+' Full_House'
         # Flush (wrong len statement) bool checked flush
         if not flush_checked:
             flush = check_flush(dict_hand)
@@ -77,11 +77,11 @@ def check_repeated(dict_hand: dict) -> str:
             return straight
 
         if len(dict_hand[key])==3:
-            return str(key)+' Three of a Kind'
+            return str(key)+' Three_of_a_Kind'
         if len(dict_hand[key])==2:
             pair = check_pair(dict_hand, key)
             if pair:
-                return str(key)+' '+pair.split()[0]+' Two Pairs'
+                return str(key)+' '+pair.split()[0]+' Two_Pairs'
             return str(key)+' Pair'
     return ''
 
@@ -89,15 +89,15 @@ def rank(dict_hand: dict) -> str:
     print(dict_hand)
 
     if check_special_flush(dict_hand, 14):
-        return str(14)+' Royal Flush'
+        return str(14)+' Royal_Flush'
     for key in dict_hand:
         if key<5:
             break
         if check_special_flush(dict_hand, key):
-            return str(key)+' Straight Flush'
+            return str(key)+' Straight_Flush'
 
     repeated = check_repeated(dict_hand)
     if repeated:
         return repeated
 
-    return str(list(dict_hand.keys())[0])+' High Card'
+    return str(list(dict_hand.keys())[0])+' High_Card'
