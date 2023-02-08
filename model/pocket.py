@@ -1,4 +1,4 @@
-import card as crd
+import model.card as crd
 
 class Pocket:
     def __init__(self) -> None:
