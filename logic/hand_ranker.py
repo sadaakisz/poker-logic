@@ -1,5 +1,18 @@
 from copy import deepcopy
 
+hand_eq = {
+    'Royal_Flush': 9,
+    'Straight_Flush': 8,
+    'Four_of_a_Kind': 7,
+    'Full_House': 6,
+    'Flush': 5,
+    'Straight': 4,
+    'Three_of_a_Kind': 3,
+    'Two_Pairs': 2,
+    'Pair': 1,
+    'High_Card': 0
+}
+
 def check_special_flush(dict_hand: dict, max_value: int) -> bool:
     fl_dict_hand = deepcopy(dict_hand)
     if max_value not in fl_dict_hand.keys():
@@ -60,6 +73,7 @@ def check_straight(dict_hand: dict, key: int) -> str:
 def check_repeated(dict_hand: dict) -> str:
     flush_checked = False
     pair_present = False
+    pair_key = None
     for key in dict_hand:
         if len(dict_hand[key])==4:
             return str(key)+' Four_of_a_Kind'
@@ -84,8 +98,9 @@ def check_repeated(dict_hand: dict) -> str:
             if pair:
                 return str(key)+' '+pair.split()[0]+' Two_Pairs'
             pair_present = True
+            pair_key = key
     if pair_present:
-        return str(key)+' Pair'
+        return str(pair_key)+' Pair'
     return ''
 
 def rank(dict_hand: dict) -> str:
@@ -104,3 +119,21 @@ def rank(dict_hand: dict) -> str:
         return repeated
 
     return str(list(dict_hand.keys())[0])+' High_Card'
+
+def list_rank(dict_hand: dict) -> str:
+    str_rank = rank(dict_hand)
+    spl_rank = str_rank.split()
+    if len(spl_rank)==2: 
+        return [hand_eq[spl_rank[-1]], int(spl_rank[0])]
+    elif len(spl_rank)==3:
+        return [hand_eq[spl_rank[-1]], int(spl_rank[0]), int(spl_rank[1])]
+    else:
+        return NotImplementedError
+    
+def winner(list_ranks: list) -> int:
+    winner_list = []
+    max_hand = max(list_ranks)
+    for i in range(list_ranks.count(max_hand)):
+        winner_idx = [m for m, n in enumerate(list_ranks) if n == max_hand][i]
+        winner_list.append(winner_idx)
+    return winner_list
