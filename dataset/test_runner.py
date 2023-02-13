@@ -24,14 +24,18 @@ suit = {
 
 def run_test():
     # Transform ace from 1 to 14
-    #fname = 'poker-hand-training-true.data'
-    fname = 'poker-hand-testing.data' # Full dataset
+    fname = 'poker-all-hands.data' # Dataset with only 2 hands per class
+    # fname = 'poker-hand-training-true.data' # Partial dataset
+    # fname = 'poker-hand-testing.data' # Full dataset
     script_dir = os.path.dirname(__file__)
     fh = open(os.path.join(script_dir, fname))
     line_number = 0
+    list_hands = []
     for line in fh:
         line_number += 1
         line = line.rstrip('\n')
+        if line[0]=='#':
+            continue
         values = line.split(',')
         
         str_cards = []
@@ -41,8 +45,14 @@ def run_test():
             value_card = 14 if values[i+1]=='1' else values[i+1]
             str_cards.append(str(value_card)+str(suit_card))
         hand = hm.make_hand(str_cards)
+        
+        print(hand)
+        list_hands.append(hr.list_rank(hand))
+        print(hr.list_rank(hand))
         if not correct_hand==hr.rank(hand).split()[-1]:
             print('Line number:', line_number, '-------------------------------')
             print(str_cards)
             print(correct_hand)
             print(hr.rank(hand).split()[-1])
+        #if line_number == 50: break
+    print(hr.winner(list_hands))

@@ -59,7 +59,7 @@ class Card:
         if len(args)==2:
             self.value = args[0]
             self.symbol = args[1]
-        if len(args)==1 and isinstance(args[0], str):
+        elif len(args)==1 and isinstance(args[0], str):
             str_card = args[0]
             if len(str_card)==3:
                 self.value = int(str_card[:2])
