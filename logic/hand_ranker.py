@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-hand_eq = {
+hand_name_to_value = {
     'Royal_Flush': 9,
     'Straight_Flush': 8,
     'Four_of_a_Kind': 7,
@@ -12,6 +12,8 @@ hand_eq = {
     'Pair': 1,
     'High_Card': 0
 }
+
+hand_value_to_name = {v: k for k, v in hand_name_to_value.items()}
 
 def check_special_flush(dict_hand: dict, max_value: int) -> bool:
     fl_dict_hand = deepcopy(dict_hand)
@@ -124,16 +126,19 @@ def list_rank(dict_hand: dict) -> str:
     str_rank = rank(dict_hand)
     spl_rank = str_rank.split()
     if len(spl_rank)==2: 
-        return [hand_eq[spl_rank[-1]], int(spl_rank[0])]
+        return [hand_name_to_value[spl_rank[-1]], int(spl_rank[0])]
     elif len(spl_rank)==3:
-        return [hand_eq[spl_rank[-1]], int(spl_rank[0]), int(spl_rank[1])]
+        return [hand_name_to_value[spl_rank[-1]], int(spl_rank[0]), int(spl_rank[1])]
     else:
         return NotImplementedError
     
-def winner(list_ranks: list) -> int:
+def winner(list_ranks: list, show_hand=False) -> int:
     winner_list = []
     max_hand = max(list_ranks)
     for i in range(list_ranks.count(max_hand)):
         winner_idx = [m for m, n in enumerate(list_ranks) if n == max_hand][i]
         winner_list.append(winner_idx)
-    return winner_list
+    if not show_hand:
+        return winner_list
+    else:
+        return winner_list, hand_value_to_name[max_hand[0]]
