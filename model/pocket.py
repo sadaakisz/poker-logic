@@ -4,6 +4,9 @@ class Pocket:
     def __init__(self) -> None:
         self.cards = []
 
+    def clear(self) -> None:
+        self.cards.clear()
+
     def append(self, card: crd.Card) -> None:
         self.cards.append(card)
 
